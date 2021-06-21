@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import de.tsenger.androsmex.data.CANSpecDO
 import es.gob.jmulticard.jse.provider.DnieLoadParameter
 import es.gob.jmulticard.jse.provider.DnieProvider
-import java.io.ByteArrayInputStream
 import java.security.KeyStore
 import java.security.Security
 import java.text.SimpleDateFormat
@@ -41,7 +40,9 @@ class MainActivity : AppCompatActivity(), NfcAdapter.ReaderCallback {
             // Generamos el Bitmap a partir de los
 //            val j2k = J2kStreamDecoder()
 //            val bis = ByteArrayInputStream(data2.imageBytes)
-
+            val calle = loadParameter.mrtdCardInfo.dataGroup11.getAddress(1)
+            val poblacion = loadParameter.mrtdCardInfo.dataGroup11.getAddress(2)
+            val provincia = loadParameter.mrtdCardInfo.dataGroup11.getAddress(3)
             Log.e("Name", data.name)
             Log.e("Surname", data.surname)
             Log.e("Issuer", data.issuer)
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity(), NfcAdapter.ReaderCallback {
             Log.e("Nacionalidad", data.nationality)
             Log.e("OptData", data.optData)
             Log.e("Sex", data.sex)
+
         } catch (e: Exception) {
             Toast.makeText(this, "Error en la lectura del Dnie", Toast.LENGTH_LONG).show()
         }
